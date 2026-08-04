@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Cricket dashboard using Sportskeeda JSON feeds"
+    />
+    <title>Cricket Live Dashboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="wrap hero-inner">
+        <div>
+          <p class="eyebrow">CRICKET API PROJECT</p>
+          <h1>Live Cricket Dashboard</h1>
+          <p class="subtitle">
+            Featured cricket matches and a detailed West Indies vs New Zealand
+            score feed, loaded through a Node.js backend.
+          </p>
+        </div>
+
+        <div class="controls">
+          <button id="refreshButton" class="button primary" type="button">
+            Refresh now
+          </button>
+          <label class="check-row">
+            <input id="autoRefresh" type="checkbox" checked />
+            Auto-refresh every 30 seconds
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap main">
+      <div class="status" aria-live="polite">
+        <span id="statusDot" class="status-dot loading"></span>
+        <span id="statusText">Loading cricket data…</span>
+        <span id="lastUpdated" class="last-updated"></span>
+      </div>
+
+      <nav class="tabs" aria-label="Dashboard sections">
+        <button class="tab active" data-panel="featured" type="button">
+          Featured
+        </button>
+        <button class="tab" data-panel="match" type="button">
+          Match details
+        </button>
+        <button class="tab" data-panel="commentary" type="button">
+          Commentary
+        </button>
+        <button class="tab" data-panel="raw" type="button">Raw JSON</button>
+      </nav>
+
+      <section id="featuredPanel" class="panel active">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">CURRENT FEED</p>
+            <h2>Featured matches</h2>
+          </div>
+          <span id="featuredCount" class="pill">0 matches</span>
+        </div>
+        <div id="featuredMatches" class="match-grid">
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+        </div>
+      </section>
+
+      <section id="matchPanel" class="panel">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">WEST INDIES VS NEW ZEALAND</p>
+            <h2>2nd ODI details</h2>
+          </div>
+        </div>
+
+        <div id="summaryCards" class="summary-grid"></div>
+
+        <div class="two-column">
+          <article class="card">
+            <h3>Match information</h3>
+            <dl id="matchInfo" class="data-list"></dl>
+          </article>
+
+          <article class="card">
+            <h3>Conditions and prediction</h3>
+            <dl id="conditions" class="data-list"></dl>
+          </article>
+        </div>
+
+        <article class="card">
+          <h3>Recent overs</h3>
+          <div id="overs" class="overs"></div>
+        </article>
+      </section>
+
+      <section id="commentaryPanel" class="panel">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">BALL BY BALL</p>
+            <h2>Latest commentary</h2>
+          </div>
+          <span id="commentaryCount" class="pill">0 updates</span>
+        </div>
+        <div id="commentary" class="commentary"></div>
+      </section>
+
+      <section id="rawPanel" class="panel">
+        <div class="section-title raw-heading">
+          <div>
+            <p class="eyebrow">DEVELOPER VIEW</p>
+            <h2>Raw API response</h2>
+          </div>
+          <select id="rawSelector" class="select">
+            <option value="featured">Featured JSON</option>
+            <option value="match">Match JSON</option>
+          </select>
+        </div>
+        <div class="raw-actions">
+          <button id="copyButton" class="button secondary" type="button">
+            Copy JSON
+          </button>
+        </div>
+        <pre id="rawJson" class="json">Loading…</pre>
+      </section>
+    </main>
+
+    <footer>
+      Educational demo. These are third-party internal endpoints and may change
+      or stop working without notice.
+    </footer>
+  </body>
+</html>
